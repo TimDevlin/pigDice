@@ -15,9 +15,12 @@ function getRandomNumber(lower,upper) {
 
 if (random === 1) {
   counter = 0;
+
 } else if (random >1) {
   counter += random;
 }
+
+// document.getElementById("player1Score").innerHTML = player1Score;
 
 
 
@@ -30,7 +33,9 @@ $(function() {
     $(".player2Name").text($("input#p2").val());
     $("#intake").hide();
     $(".playField").show();
-  });
+    $(".playField2").show();
+    $("#player1Score").text(player1Score);
+    $("#player2Score").text(player2Score);  });
 });
 
 
