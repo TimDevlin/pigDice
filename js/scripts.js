@@ -50,22 +50,18 @@ $(function() {
           newPlayer1.turn = false;
           newPlayer2.turn = true;
           alert(turnTotal1);
-          alert(newPlayer2.turn);
         } else if (random > 1) {
           turnTotal1 += random;
           alert(turnTotal1);
-          alert(newPlayer2.turn);
         }
       $("button#hold1").click(function(event) {
         event.preventDefault();
-        alert("hi");
         newPlayer1.turn = false;
         newPlayer2.turn = true;
         newPlayer1.score += turnTotal1;
-        alert(newPlayer1.score);
         turnTotal1 = 0;
-        alert(newPlayer2.turn);
-            $("#player1score").text(newPlayer1.score);
+        $("#player1score").text(newPlayer1.score);
+        $(".playerField").hide();
       });
     });
   });
@@ -84,14 +80,14 @@ $(function() {
           } else if (random > 1) {
             turnTotal2 += random;
             alert(turnTotal2);
-            alert(newPlayer2.turn);
           }
           $("button#hold2").click(function(event) {
+            event.preventDefault();
             newPlayer1.turn = true;
             newPlayer2.turn = false;
             newPlayer2.score += turnTotal2;
             turnTotal2 = 0;
-            alert(newPlayer2.turn);
+            $("#player2score").text(newPlayer2.score);
       });
     });
 });
