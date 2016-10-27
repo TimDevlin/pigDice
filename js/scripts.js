@@ -1,5 +1,5 @@
 // back end
-var counter = 0;
+var turnTotal = 0;
 var player1Score = 0;
 var player2Score = 0;
 var player1Name;
@@ -19,12 +19,7 @@ function getRandomNumber(lower,upper) {
   return dieCount;
 }
 
-if (random === 1) {
-  counter = 0;
 
-} else if (random >1) {
-  counter += random;
-}
 
 // document.getElementById("player1Score").innerHTML = player1Score;
 
@@ -34,42 +29,71 @@ if (random === 1) {
 $(function() {
   $("form#intake").submit(function(event) {
     event.preventDefault();
+
     var inputtedFirstPlayer = $("input#p1").val();
     var inputtedSecondPlayer = $("input#p2").val();
     var newPlayer1 = new Player(inputtedFirstPlayer, 0, true);
     var newPlayer2 = new Player(inputtedSecondPlayer, 0, false);
+
     $("#intake").hide();
     $(".playField").show();
     $(".playField2").show();
 
-    // $(".player1").text(newPlayer1);
-      $(".player1").append( "<h2>Player 1: " + newPlayer1.name + "</h2>");
-      $(".player1").append( "<h3>Score: " + newPlayer1.score + "</h3>");
-      // );
-      $(".player2").append( "<h2>Player 2: " + newPlayer2.name + "</h2>");
-      $(".player2").append( "<h3>Score: " + newPlayer2.score + "</h3>");
+      $("#player1name").text(newPlayer1.name);
+      $("#player2name").text(newPlayer2.name);
+      $("#player1score").text(newPlayer1.score);
+      $("#player2score").text(newPlayer2.score);
+
+      if (newPlayer1.turn === true) {
+
+      $("button#roll1").click(function(event) {
+        event.preventDefault();
+        random = getRandomNumber(1,6);
+        if (random === 1) {
+          turnTotal = 0;
+          newPlayer1.turn = false;
+          newPlayer2.turn = true;
+          alert(turnTotal);
+        } else if (random > 1) {
+          turnTotal += random;
+          alert(turnTotal);
+        }
+      $("button#hold1").click(function(event) {
+        event.preventDefault();
+        alert("hi");
+        newPlayer1.turn = false;
+        newPlayer2.turn = true;
+        newPlayer1.score += turnTotal;
+        turnTotal = 0;
+      });
+    });
+    } else if (newPlayer2.turn === true) {
+        $("button#roll2").click(function(event) {
+          event.preventDefault();
+          random = getRandomNumber(1,6);
+          if (random === 1) {
+            turnTotal = 0;
+            newPlayer1.turn = true;
+            newPlayer2.turn = false;
+            alert(turnTotal);
+          } else if (random > 1) {
+            turnTotal += random;
+            alert(turnTotal);
+          }
+          $("button#hold2").click(function(event) {
+            newPlayer1.turn = true;
+            newPlayer2.turn = false;
+            newPlayer2.score += turnTotal;
+            turnTotal = 0;
+      });
+    });
+}
+
 });
 });
+// });
+// $(function() {
 
-
-
-    // $(".player1Name").text($("input#p1").val());
-    // $(".player2Name").text($("input#p2").val());
-
-
-      // $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
-
-    $("#player2Score").text(player2Score);
-
-
-
-$(function() {
-  $("button#roll").click(function(event) {
-    event.preventDefault();
-
-    random = getRandomNumber(1,6);
-  });
-});
 
 
 
