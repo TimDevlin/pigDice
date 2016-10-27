@@ -8,6 +8,12 @@ var random;
 var dieCount;
 
 
+function Player (name, score, turn) {
+  this.name = name;
+  this.score = score;
+  this.turn = turn;
+}
+
 function getRandomNumber(lower,upper) {
   return Math.floor(Math.random()*(upper-lower + 1)) + lower;
   return dieCount;
@@ -28,15 +34,33 @@ if (random === 1) {
 $(function() {
   $("form#intake").submit(function(event) {
     event.preventDefault();
-
-    $(".player1Name").text($("input#p1").val());
-    $(".player2Name").text($("input#p2").val());
+    var inputtedFirstPlayer = $("input#p1").val();
+    var inputtedSecondPlayer = $("input#p2").val();
+    var newPlayer1 = new Player(inputtedFirstPlayer, 0, true);
+    var newPlayer2 = new Player(inputtedSecondPlayer, 0, false);
     $("#intake").hide();
     $(".playField").show();
     $(".playField2").show();
-    $("#player1Score").text(player1Score);
-    $("#player2Score").text(player2Score);  });
+
+    // $(".player1").text(newPlayer1);
+      $(".player1").append( "<h2>Player 1: " + newPlayer1.name + "</h2>");
+      $(".player1").append( "<h3>Score: " + newPlayer1.score + "</h3>");
+      // );
+      $(".player2").append( "<h2>Player 2: " + newPlayer2.name + "</h2>");
+      $(".player2").append( "<h3>Score: " + newPlayer2.score + "</h3>");
 });
+});
+
+
+
+    // $(".player1Name").text($("input#p1").val());
+    // $(".player2Name").text($("input#p2").val());
+
+
+      // $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+
+    $("#player2Score").text(player2Score);
+
 
 
 $(function() {
